@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서울대학교 법과경제연구센터 (CLE)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; color: #333; line-height: 1.6; background-color: #fff; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        
+        /* 헤더 (네비게이션바) */
+        header { 
+            background-color: #0F204B; /* 서울대 상징색인 진한 파란색 계열 */
+            color: #fff; 
+            padding: 1.2rem 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+        .header-container { 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        nav ul { display: flex; gap: 2.5rem; }
+        nav ul li a { font-size: 1.05rem; font-weight: 500; }
+        nav ul li a:hover { color: #8FAADC; }
+
+        /* 히어로 섹션 (메인 배너) */
+        .hero { 
+            background: linear-gradient(rgba(15, 32, 75, 0.8), rgba(15, 32, 75, 0.8)), url('') center/cover;
+            color: #fff;
+            padding: 6rem 2rem; 
+            text-align: center; 
+        }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .hero p { font-size: 1.15rem; font-weight: 300; max-width: 800px; margin: auto; word-break: keep-all; line-height: 1.8; color: #e2e8f0; }
+
+        /* 메인 콘텐츠 영역 */
+        .main-container { 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: 4rem auto; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 3rem; 
+        }
+        .section-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            border-bottom: 2px solid #0F204B; 
+            padding-bottom: 0.8rem; 
+            margin-bottom: 1.5rem; 
+            color: #0F204B; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title .more {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .card-list { display: flex; flex-direction: column; gap: 1rem; }
+        .card-item { 
+            padding: 1.5rem; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            background: #fafbfc;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #fff;
+        }
+        .card-item h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #2d3748; }
+        .card-item p { font-size: 0.95rem; color: #718096; margin-bottom: 0.5rem; }
+        .card-item .date { font-size: 0.85rem; color: #a0aec0; }
+
+        /* 푸터 */
+        footer { 
+            background-color: #1a202c; 
+            color: #a0aec0; 
+            padding: 3rem 0; 
+            margin-top: 4rem; 
+        }
+        .footer-content { 
+            width: 90%;
+            max-width: 1200px; 
+            margin: auto; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem; 
+        }
+        .footer-info p { margin-bottom: 0.3rem; }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 1rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo"><a href="#">서울대학교 법과경제연구센터</a></div>
+            <nav>
+                <ul>
+                    <li><a href="#">센터소개</a></li>
+                    <li><a href="#">법경제학 연구자료</a></li>
+                    <li><a href="#">진행중인 연구</a></li>
+                    <li><a href="#">관련 사이트</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Center for Law & Economics</h1>
+        <p>
+            법과 경제가 만나는 지점에서 이슈가 되는 여러 현상들에 대해 분석하고 정책적 대안을 모색합니다.<br>
+            전통적인 법경제학 영역부터 변화무쌍한 ICT, 빅데이터, 인공지능, 개인정보보호 등 새로운 현안에 대한 연구를 수행합니다.
+        </p>
+    </section>
+
+    <div class="main-container">
+        
+        <section>
+            <div class="section-title">
+                공지사항
+                <a href="#" class="more">더보기 +</a>
+            </div>
+            <div class="card-list">
+                <a href="#" class="card-item">
+                    <h3>2022년도 춘계 학술대회 개최 안내</h3>
+                    <p>서울대학교 법과경제연구센터 춘계 법경제학 학술대회 일정 및 프로그램 안내입니다.</p>
+                    <span class="date">2022.03.15</span>
+                </a>
+                <a href="#" class="card-item">
+                    <h3>연구센터 신임 연구원 및 조교 모집 공고</h3>
+                    <p>빅데이터 및 ICT 관련 법경제학 연구를 함께할 연구원 및 조교를 모집합니다.</p>
+                    <span class="date">2022.02.10</span>
+                </a>
+                <a href="#" class="card-item">
+                    <h3>[세미나] 인공지능과 데이터, 그리고 법</h3>
+                    <p>데이터 이코노미 시대의 규제 혁신에 대한 전문가 초청 세미나를 개최합니다.</p>
+                    <span class="date">2021.11.05</span>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">
+                법경제학 연구자료
+                <a href="#" class="more">더보기 +</a>
+            </div>
+            <div class="card-list">
+                <a href="#" class="card-item">
+                    <h3>[단행본] 데이터 이코노미 (Data Economy)</h3>
+                    <p>인공지능, 빅데이터, 개인정보보호 등 데이터 이코노미 시대에 법과 제도가 나아가야 할 방향을 제시한 연구서 발간.</p>
+                    <span class="date">서울대 법과경제연구센터 저</span>
+                </a>
+                <a href="#" class="card-item">
+                    <h3>ICT 영역에서의 법적·경제적 현안 연구</h3>
+                    <p>변화하는 디지털 플랫폼 시장에서의 규제와 자율성에 관한 정책 분석 보고서.</p>
+                    <span class="date">Working Paper Series</span>
+                </a>
+                <a href="#" class="card-item">
+                    <h3>법경제학적 관점에서의 정보 주권 정책 분석</h3>
+                    <p>글로벌 IT 플랫폼과 국내 플랫폼 보호 및 규제 근거에 대한 근본적인 해결 방안 모색.</p>
+                    <span class="date">Working Paper Series</span>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p><strong>서울대학교 법과경제연구센터 (Center for Law and Economics)</strong></p>
+                <p>서울특별시 관악구 관악로 1 서울대학교 법학전문대학원 내</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2022 Center for Law & Economics, SNU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
