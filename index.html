@@ -3,156 +3,784 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b2741">
     <title>서울대학교 법과경제연구센터</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; color: #333; line-height: 1.6; background-color: #fff; }
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        ul { list-style: none; }
-        
-        header { 
-            background-color: #0F204B;
-            color: #fff; 
-            padding: 1.2rem 0; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
+        :root {
+            --navy: #0b2741;
+            --navy-deep: #071b2d;
+            --blue: #176a9e;
+            --blue-soft: #eaf5fa;
+            --ink: #172c3f;
+            --text: #42576a;
+            --muted: #516b7c;
+            --line: #dce7ed;
+            --paper: #ffffff;
+            --ground: #f6f9fa;
+            --accent: #b8e0ec;
+            --shadow: 0 18px 50px rgba(11, 39, 65, 0.09);
         }
-        .header-container { 
-            width: 90%; 
-            max-width: 1200px; 
-            margin: auto; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
-        nav ul { display: flex; gap: 2.5rem; }
-        nav ul li a { font-size: 1.05rem; font-weight: 500; }
-        nav ul li a:hover { color: #8FAADC; }
 
+        * { box-sizing: border-box; }
 
-        .hero { 
-            background: linear-gradient(rgba(15, 32, 75, 0.8), rgba(15, 32, 75, 0.8)), url('') center/cover;
-            color: #fff;
-            padding: 6rem 2rem; 
-            text-align: center; 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 132px;
         }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1.5rem; font-weight: 700; }
-        .hero p { font-size: 1.15rem; font-weight: 300; max-width: 800px; margin: auto; word-break: keep-all; line-height: 1.8; color: #e2e8f0; }
 
+        #top,
+        section[id] { scroll-margin-top: 132px; }
 
-        .main-container { 
-            width: 75%; 
-            max-width: 1200px; 
-            margin: 4rem auto; 
-            gap: 3rem; 
+        body {
+            margin: 0;
+            min-width: 320px;
+            background: var(--ground);
+            color: var(--ink);
+            font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+            line-height: 1.75;
+            letter-spacing: -0.015em;
         }
-        .main-container-center { 
-            width: 85%; 
-            max-width: 1200px; 
-            margin: 4rem auto; 
-            padding-bottom: 0.5rem; 
-            gap: 3rem; 
-            text-align: center;
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-        .section-title { 
-            font-size: 1.5rem; 
+
+        a:focus-visible {
+            outline: 3px solid #76c4de;
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(11, 39, 65, 0.1);
+            background: rgba(255, 255, 255, 0.93);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            width: min(1240px, calc(100% - 48px));
+            min-height: 86px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--navy);
+            color: var(--navy);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
             font-weight: 700;
-            border-bottom: 2px solid #0F204B; 
-            padding-bottom: 0.8rem; 
-            margin-bottom: 1.5rem; 
-            color: #0F204B; 
+            letter-spacing: -0.08em;
+        }
+
+        .brand-copy {
+            display: grid;
+            gap: 1px;
+            min-width: 0;
+        }
+
+        .brand-copy strong {
+            color: var(--navy);
+            font-size: 17px;
+            font-weight: 750;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        .brand-copy span {
+            color: var(--muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: clamp(14px, 2.5vw, 34px);
+            list-style: none;
+        }
+
+        .main-nav a {
+            position: relative;
+            display: block;
+            padding: 8px 0;
+            color: #51677a;
+            font-size: 20px;
+            font-weight: 650;
+            white-space: nowrap;
+            transition: color 180ms ease;
+        }
+
+        .main-nav a::after {
+            position: absolute;
+            right: 0;
+            bottom: 1px;
+            left: 0;
+            height: 2px;
+            background: var(--blue);
+            content: "";
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 180ms ease;
+        }
+
+        .main-nav a:hover,
+        .main-nav a:focus-visible { color: var(--navy); }
+        .main-nav a:hover::after,
+        .main-nav a:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background: var(--paper);
+        }
+
+        .hero::before {
+            position: absolute;
+            z-index: -1;
+            top: -210px;
+            right: -100px;
+            width: min(52vw, 760px);
+            aspect-ratio: 1;
+            border: 1px solid #c9e4ec;
+            border-radius: 50%;
+            box-shadow: 0 0 0 58px rgba(222, 243, 248, 0.68), 0 0 0 116px rgba(234, 246, 249, 0.78);
+            content: "";
+        }
+
+        .hero::after {
+            position: absolute;
+            z-index: -1;
+            bottom: 0;
+            left: 0;
+            width: 37%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--navy), var(--blue), #92d4e6);
+            content: "";
+        }
+
+        .hero-inner {
+            width: min(1240px, calc(100% - 48px));
+            min-height: 478px;
+            margin: 0 auto;
+            padding: 82px 0 76px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(250px, 0.72fr);
+            align-items: end;
+            gap: 80px;
+        }
+
+        .eyebrow {
+            margin: 0 0 21px;
+            color: var(--blue);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            line-height: 1.2;
+        }
+
+        .hero h1 {
+            max-width: 740px;
+            margin: 0;
+            color: var(--navy);
+            font-size: clamp(42px, 5.25vw, 78px);
+            font-weight: 760;
+            letter-spacing: -0.072em;
+            line-height: 1.13;
+            word-break: keep-all;
+        }
+
+        .hero-text {
+            max-width: 535px;
+            margin: 27px 0 0;
+            color: var(--text);
+            font-size: clamp(16px, 1.55vw, 19px);
+            line-height: 1.75;
+            word-break: keep-all;
+        }
+
+        .hero-label {
+            align-self: center;
+            margin: 0 0 2px;
+            padding: 28px 0 28px 30px;
+            border-left: 1px solid #aeceda;
+        }
+
+        .hero-label span {
+            display: block;
+            color: var(--navy);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(22px, 3vw, 37px);
+            letter-spacing: -0.055em;
+            line-height: 1.14;
+        }
+
+        .hero-label small {
+            display: block;
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 650;
+            letter-spacing: 0.1em;
+            line-height: 1.6;
+            text-transform: uppercase;
+        }
+
+        main { overflow: hidden; }
+
+        .content-wrap {
+            width: min(1240px, calc(100% - 48px));
+            margin: 0 auto;
+            padding: 112px 0 126px;
+        }
+
+        .section-kicker {
+            margin: 0 0 16px;
+            color: var(--blue);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            margin: 0;
+            color: var(--navy);
+            font-size: clamp(30px, 3.1vw, 47px);
+            font-weight: 740;
+            letter-spacing: -0.06em;
+            line-height: 1.22;
+            word-break: keep-all;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 310px;
+            gap: clamp(52px, 8vw, 142px);
+            align-items: start;
+        }
+
+        .intro-copy {
+            padding-top: 7px;
+        }
+
+        .intro-copy p {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(16px, 1.38vw, 18px);
+            line-height: 2;
+            word-break: keep-all;
+        }
+
+        .intro-copy p + p { margin-top: 27px; }
+
+        .intro-copy .lead {
+            margin-top: 29px;
+            color: var(--ink);
+            font-size: clamp(19px, 1.72vw, 23px);
+            font-weight: 570;
+            line-height: 1.84;
+        }
+
+        .index-card {
+            position: relative;
+            padding: 31px 30px 28px;
+            border-top: 3px solid var(--navy);
+            background: var(--paper);
+            box-shadow: var(--shadow);
+        }
+
+        .index-card::after {
+            position: absolute;
+            right: -25px;
+            bottom: -25px;
+            z-index: -1;
+            width: 140px;
+            height: 140px;
+            border: 1px solid #cfe3ea;
+            content: "";
+        }
+
+        .index-card p {
+            margin: 0 0 20px;
+            color: var(--muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .index-card ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .index-card li {
+            padding: 13px 0;
+            border-top: 1px solid var(--line);
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .index-card li:first-child { border-top: 0; }
+
+        .research-section {
+            margin-top: 130px;
+            padding: clamp(34px, 5vw, 66px);
+            background: var(--navy);
+            color: white;
+            box-shadow: 0 24px 55px rgba(8, 33, 56, 0.18);
+        }
+
+        .research-head {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
+            gap: 32px;
+            padding-bottom: 42px;
+            border-bottom: 1px solid rgba(223, 244, 249, 0.26);
         }
-        .section-title .more {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 400;
-        }
-        
-        .card-list { display: flex; flex-direction: column; gap: 1rem; }
-        .card-item { 
-            padding: 1.5rem; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 8px; 
-            background: #fafbfc;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .card-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            background: #fff;
-        }
-        .card-item h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #2d3748; }
-        .card-item p { font-size: 0.95rem; color: #718096; margin-bottom: 0.5rem; }
-        .card-item .date { font-size: 0.85rem; color: #a0aec0; }
 
+        .research-section .section-kicker { color: #9fd9e8; }
+        .research-section .section-heading { color: white; }
 
-        footer { 
-            background-color: #1a202c; 
-            color: #a0aec0; 
-            padding: 0.8rem 0; 
-            margin-top: 4rem; 
+        .research-head p:last-child {
+            max-width: 320px;
+            margin: 0;
+            color: #c7dae2;
+            font-size: 15px;
+            line-height: 1.8;
+            word-break: keep-all;
         }
-        .footer-content { 
-            width: 90%;
-            max-width: 1200px; 
-            margin: auto; 
+
+        .program-grid {
+            margin-top: 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .program {
+            min-height: 285px;
+            padding: 36px 33px 30px;
+            border-right: 1px solid rgba(223, 244, 249, 0.24);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem; 
+            flex-direction: column;
         }
-        .footer-info p { margin-bottom: 0rem; }
-        
 
-        @media (max-width: 768px) {
-            .header-container { flex-direction: column; gap: 1rem; }
-            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2rem; }
-            .main-container { grid-template-columns: 1fr; }
-            .footer-content { flex-direction: column; text-align: center; gap: 1rem; }
+        .program:first-child { padding-left: 0; }
+        .program:last-child {
+            padding-right: 0;
+            border-right: 0;
+        }
+
+        .program-number {
+            margin-bottom: auto;
+            color: #80cfe3;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .program h3 {
+            margin: 27px 0 12px;
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.045em;
+            line-height: 1.4;
+            word-break: keep-all;
+        }
+
+        .program p {
+            margin: 0;
+            color: #c7dae2;
+            font-size: 15px;
+            line-height: 1.85;
+            word-break: keep-all;
+        }
+
+        .sapi-section {
+            margin-top: 130px;
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+            align-items: stretch;
+        }
+
+        .sapi-title {
+            padding: clamp(35px, 5vw, 67px);
+            background: var(--blue-soft);
+        }
+
+        .sapi-title .section-heading { margin-top: 2px; }
+
+        .sapi-copy {
+            position: relative;
+            padding: clamp(35px, 5vw, 67px);
+            background: var(--paper);
+            box-shadow: var(--shadow);
+        }
+
+        .sapi-copy::before {
+            display: block;
+            width: 44px;
+            height: 3px;
+            margin-bottom: 30px;
+            background: var(--blue);
+            content: "";
+        }
+
+        .sapi-copy p {
+            max-width: 620px;
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(17px, 1.55vw, 20px);
+            font-weight: 520;
+            line-height: 1.95;
+            word-break: keep-all;
+        }
+
+        .contact-section {
+            margin-top: 130px;
+            padding-top: 27px;
+            border-top: 1px solid #bdccd4;
+            display: grid;
+            grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+            gap: 30px;
+            align-items: end;
+        }
+
+        .contact-section .section-heading { font-size: clamp(28px, 2.7vw, 39px); }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .contact-item {
+            min-height: 114px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            background: var(--paper);
+        }
+
+        .contact-item span {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .contact-item a,
+        .contact-item p {
+            margin: 0;
+            color: var(--navy);
+            font-size: 16px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item a:hover { color: var(--blue); }
+
+        .director {
+            margin: 23px 0 0;
+            grid-column: 2;
+            color: var(--muted);
+            font-size: 15px;
+            word-break: keep-all;
+        }
+
+        .site-footer {
+            padding: 31px 0;
+            background: var(--navy-deep);
+            color: #c4d4de;
+        }
+
+        .footer-inner {
+            width: min(1240px, calc(100% - 48px));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-inner p {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.75;
+        }
+
+        .footer-mark {
+            color: #85cfe1;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 880px) {
+            .header-inner {
+                min-height: 0;
+                padding: 18px 0 15px;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 11px;
+            }
+
+            .main-nav { width: 100%; }
+            .main-nav ul { justify-content: space-between; }
+            .main-nav a { font-size: 13px; }
+
+            .hero-inner {
+                min-height: 0;
+                padding: 79px 0 68px;
+                grid-template-columns: 1fr;
+                gap: 47px;
+            }
+
+            .hero-label {
+                width: min(100%, 420px);
+                padding: 20px 0 20px 23px;
+            }
+
+            .intro-grid { grid-template-columns: 1fr; }
+            .index-card { width: min(100%, 440px); }
+            .research-head { align-items: flex-start; flex-direction: column; }
+            .sapi-section { grid-template-columns: 1fr; }
+            .contact-section { grid-template-columns: 1fr; }
+            .director { grid-column: auto; }
+        }
+
+        @media (max-width: 620px) {
+            .header-inner,
+            .hero-inner,
+            .content-wrap,
+            .footer-inner { width: min(100% - 32px, 1240px); }
+
+            .brand-mark {
+                width: 30px;
+                height: 30px;
+                flex-basis: 30px;
+                font-size: 13px;
+            }
+
+            .brand { gap: 10px; }
+            .brand-copy strong { font-size: 15px; }
+            .brand-copy span { font-size: 9px; }
+            .main-nav ul { gap: 5px 14px; justify-content: flex-start; flex-wrap: wrap; }
+
+            .hero::before {
+                top: -95px;
+                right: -150px;
+                width: 420px;
+            }
+
+            .hero-inner { padding: 63px 0 61px; }
+            .hero h1 {
+                max-width: 100%;
+                font-size: clamp(33px, 10.25vw, 50px);
+                letter-spacing: -0.06em;
+                overflow-wrap: anywhere;
+                word-break: normal;
+            }
+            .hero-text { margin-top: 22px; font-size: 16px; }
+            .hero-label span { font-size: 25px; }
+
+            .content-wrap { padding: 82px 0 90px; }
+            .intro-copy .lead { margin-top: 23px; font-size: 19px; }
+            .intro-copy p { line-height: 1.92; }
+            .index-card { margin-right: 24px; }
+
+            .research-section { margin-top: 94px; }
+            .research-head { padding-bottom: 25px; }
+            .program-grid { grid-template-columns: 1fr; }
+            .program,
+            .program:first-child,
+            .program:last-child {
+                min-height: 0;
+                padding: 27px 0;
+                border-right: 0;
+                border-bottom: 1px solid rgba(223, 244, 249, 0.24);
+            }
+            .program:last-child { border-bottom: 0; padding-bottom: 0; }
+            .program h3 { margin: 20px 0 8px; }
+
+            .sapi-section,
+            .contact-section { margin-top: 94px; }
+            .contact-info { grid-template-columns: 1fr; }
+            .contact-item { min-height: 0; }
+            .footer-inner { align-items: flex-start; flex-direction: column; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-container">
-            <div class="logo"><a href="#"><p style="font-size: 32px;">서울대학교 법과경제연구센터</p><p style="font-size: 20px;">Center for Law & Economics</p></a></div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="서울대학교 법과경제연구센터 처음으로">
+                <span class="brand-mark" aria-hidden="true">CLE</span>
+                <span class="brand-copy">
+                    <strong>서울대학교 법과경제연구센터</strong>
+                    <span>Center for Law &amp; Economics</span>
+                </span>
+            </a>
+            <nav class="main-nav" aria-label="주요 메뉴">
+                <ul>
+                    <li><a href="#about">센터소개</a></li>
+                    <!-- <li><a href="#research">연구활동</a></li>
+                    <li><a href="#sapi">SAPI</a></li>
+                    <li><a href="#contact">문의</a></li> -->
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="main-container">
-            <div class="section-title">
-                센터소개
-            </div><br>
-        <p>
-서울대학교 ‘법과경제연구센터’는 법경제학 분야의 연구를 촉진하고 그 성과를 널리 공유하기 위해 설립된 연구센터입니다. 법경제학은 경제학적 사고방식과 연구 방법론을 법의 전 분야에 응용하여 법의 작동 원리를 분석하는 학문입니다. 나아가 단순한 방법론 제시를 넘어, 사회적으로 가장 바람직한 법의 형태가 무엇인지 탐구하는 독자적인 학문 영역이기도 합니다.<br><br>
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-inner">
+                <div>
+                    <p class="eyebrow">CENTER FOR LAW &amp; ECONOMICS</p>
+                    <h1 id="hero-title">서울대학교<br>법과경제연구센터</h1>
+                    <p class="hero-text"><br></p>
+                </div>
+                <p class="hero-label" aria-label="Center for Law and Economics">
+                    <span>Center for<br>Law &amp; Economics</span>
+                    <small>Center for Law &amp; Economics</small>
+                </p>
+            </div>
+        </section>
 
-우리 센터는 법학 연구자와 법조 실무가가 법에 대한 경제학적 접근에 친숙해지고, 동시에 경제학 연구자들이 법의 현실적인 작동 방식을 깊이 이해하도록 돕는 것을 중요한 역할로 삼고 있습니다. 이를 위해 정기적인 세미나와 학술대회를 개최하여, 여러 연구자와 실무가가 활발히 교류하고 협력할 수 있는 학술 생태계를 조성하기 위해 노력하고 있습니다. 또한 국내 법제도 현실에 기반한 다양한 법경제학 연구가 이루어질 수 있는 환경을 마련하고, 나아가 아시아 지역 법경제학 연구의 허브로 도약하는 것을 주요 목표로 삼고 있습니다.<br><br>
+        <div class="content-wrap">
+            <section id="about" aria-labelledby="about-title">
+                <div class="intro-copy">
+                    <p class="section-kicker">About the center</p>
+                    <h2 id="about-title" class="section-heading">센터소개</h2><br><br>
+                    <p>서울대학교 ‘법과경제연구센터’는 법경제학 분야의 연구를 촉진하고 그 성과를 널리 공유하기 위해 설립된 연구센터입니다. 법경제학은 경제학적 사고방식과 연구 방법론을 법의 전 분야에 응용하여 법의 작동 원리를 분석하는 학문입니다. 나아가 단순한 방법론 제시를 넘어, 사회적으로 가장 바람직한 법의 형태가 무엇인지 탐구하는 독자적인 학문 영역이기도 합니다.</p>
 
-서울대학교 법과경제연구센터는 법경제학에 관심을 가진 신진 연구자들의 도전을 격려하고, 중진 연구자들이 법제도와 사회 현실을 충실히 반영한 심도 있는 연구를 진행할 수 있도록 적극 지원합니다. 센터에서 운영하는 다양한 프로그램은 연구자들이 끊임없이 변화하는 현실 속에서 전통적인 법 분야를 재해석하고, 새롭게 부각되는 영역에 과감히 도전할 수 있는 든든한 발판이 될 것입니다.<br><br>
+                    <p>우리 센터는 법학 연구자와 법조 실무가가 법에 대한 경제학적 접근에 친숙해지고, 동시에 경제학 연구자들이 법의 현실적인 작동 방식을 깊이 이해하도록 돕는 것을 중요한 역할로 삼고 있습니다. 이를 위해 정기적인 세미나와 학술대회를 개최하여, 여러 연구자와 실무가가 활발히 교류하고 협력할 수 있는 학술 생태계를 조성하기 위해 노력하고 있습니다. 또한 국내 법제도 현실에 기반한 다양한 법경제학 연구가 이루어질 수 있는 환경을 마련하고, 나아가 아시아 지역 법경제학 연구의 허브로 도약하는 것을 주요 목표로 삼고 있습니다.</p>
 
-근래 들어서는, 인공지능을 포함한 신기술의 눈부신 발전과 그에 따른 사회적, 경제적 변화에 주목하여, SNU AI Policy Initiative (SAPI)를 설립하고 이를 통한 연구활동에 집중하고 있습니다.<br><br>
+                    <p>서울대학교 법과경제연구센터는 법경제학에 관심을 가진 신진 연구자들의 도전을 격려하고, 중진 연구자들이 법제도와 사회 현실을 충실히 반영한 심도 있는 연구를 진행할 수 있도록 적극 지원합니다. 센터에서 운영하는 다양한 프로그램은 연구자들이 끊임없이 변화하는 현실 속에서 전통적인 법 분야를 재해석하고, 새롭게 부각되는 영역에 과감히 도전할 수 있는 든든한 발판이 될 것입니다.</p>
 
-센터에 관한 문의 사항은 담당자(yoonjy@snu.ac.kr)에게 연락해 주시기 바랍니다.<br><br>
+                    <p>근래 들어서는, 인공지능을 포함한 신기술의 눈부신 발전과 그에 따른 사회적, 경제적 변화에 주목하여, SNU AI Policy Initiative (SAPI)를 설립하고 이를 통한 연구활동에 집중하고 있습니다.</p>
 
-센터장 고학수 교수(서울대학교 법학전문대학원)
-        </p>
-    </div>
+                    <p>센터에 관한 문의 사항은 담당자(yoonjy@snu.ac.kr)에게 연락해 주시기 바랍니다.</p>
 
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <p><strong>서울대학교 법과경제연구센터 (Center for Law & Economics)<br>Tel : 02-880-4259 &nbsp&nbsp&nbsp Email : yoonjy@snu.ac.kr</strong></p>
-             </div>
+                    <p>센터장 고학수 교수(서울대학교 법학전문대학원)</p>
+
+                </div>
+                <!--<aside class="index-card" aria-label="센터 안내">
+                    <p>CENTER INDEX</p>
+                    <ul>
+                        <li>센터소개</li>
+                        <li>연구활동</li>
+                        <li>SNU AI Policy Initiative (SAPI)</li>
+                    </ul>
+                </aside>-->
+            </section>
+
+            <!--<section id="research" class="research-section" aria-labelledby="research-title">
+                <div class="research-head">
+                    <div>
+                        <p class="section-kicker">Research &amp; exchange</p>
+                        <h2 id="research-title" class="section-heading">연구활동</h2>
+                    </div>
+                    <p>센터에서 운영하는 다양한 프로그램은 연구자들이 끊임없이 변화하는 현실 속에서 전통적인 법 분야를 재해석하고, 새롭게 부각되는 영역에 과감히 도전할 수 있는 든든한 발판이 될 것입니다.</p>
+                </div>
+                <div class="program-grid">
+                    <article class="program">
+                        <span class="program-number">01</span>
+                        <h3>정기적인 세미나와 학술대회</h3>
+                        <p>정기적인 세미나와 학술대회를 개최하여, 여러 연구자와 실무가가 활발히 교류하고 협력할 수 있는 학술 생태계를 조성하기 위해 노력하고 있습니다.</p>
+                    </article>
+                    <article class="program">
+                        <span class="program-number">02</span>
+                        <h3>국내 법제도 현실에 기반한 다양한 법경제학 연구</h3>
+                        <p>국내 법제도 현실에 기반한 다양한 법경제학 연구가 이루어질 수 있는 환경을 마련하고, 나아가 아시아 지역 법경제학 연구의 허브로 도약하는 것을 주요 목표로 삼고 있습니다.</p>
+                    </article>
+                    <article class="program">
+                        <span class="program-number">03</span>
+                        <h3>센터에서 운영하는 다양한 프로그램</h3>
+                        <p>서울대학교 법과경제연구센터는 법경제학에 관심을 가진 신진 연구자들의 도전을 격려하고, 중진 연구자들이 법제도와 사회 현실을 충실히 반영한 심도 있는 연구를 진행할 수 있도록 적극 지원합니다. 센터에서 운영하는 다양한 프로그램은 연구자들이 끊임없이 변화하는 현실 속에서 전통적인 법 분야를 재해석하고, 새롭게 부각되는 영역에 과감히 도전할 수 있는 든든한 발판이 될 것입니다.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="sapi" class="sapi-section" aria-labelledby="sapi-title">
+                <div class="sapi-title">
+                    <p class="section-kicker">Initiative</p>
+                    <h2 id="sapi-title" class="section-heading">SNU AI<br>Policy Initiative</h2>
+                </div>
+                <div class="sapi-copy">
+                    <p>근래 들어서는, 인공지능을 포함한 신기술의 눈부신 발전과 그에 따른 사회적, 경제적 변화에 주목하여, SNU AI Policy Initiative (SAPI)를 설립하고 이를 통한 연구활동에 집중하고 있습니다.</p>
+                </div>
+            </section>
+
+            <section id="contact" class="contact-section" aria-labelledby="contact-title">
+                <div>
+                    <p class="section-kicker">Contact</p>
+                    <h2 id="contact-title" class="section-heading">문의</h2>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>EMAIL</span>
+                        <a href="mailto:yoonjy@snu.ac.kr">yoonjy@snu.ac.kr</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>TELEPHONE</span>
+                        <p>02-880-4259</p>
+                    </div>
+                </div>
+                <p class="director">센터에 관한 문의 사항은 담당자(yoonjy@snu.ac.kr)에게 연락해 주시기 바랍니다.<br>센터장 고학수 교수(서울대학교 법학전문대학원)</p>
+            </section>-->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p><strong>서울대학교 법과경제연구센터 (Center for Law &amp; Economics)</strong><br>Tel : 02-880-4259 &nbsp;&nbsp;&nbsp; Email : yoonjy@snu.ac.kr</p>
+            <span class="footer-mark">Center for Law &amp; Economics</span>
         </div>
     </footer>
-
 </body>
 </html>
